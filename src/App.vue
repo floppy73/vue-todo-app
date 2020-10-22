@@ -8,13 +8,20 @@
         flat
       >
         <v-toolbar-title>TODO APP</v-toolbar-title>
-        <v-tabs v-model="tab">
-          <v-tab
-            v-for="item in items"
-            :key="item.tab">
-            {{ item.tab }}
-          </v-tab>
-        </v-tabs>
+        <template v-slot:extension>
+          <v-tabs 
+            v-model="tab"
+            fixed-tabs
+            align-with-title
+          >
+            <v-tabs-slider color="teal lighten-4"></v-tabs-slider>
+            <v-tab
+              v-for="item in items"
+              :key="item.tab">
+              {{ item.tab }}
+            </v-tab>
+          </v-tabs>
+        </template>
       </v-toolbar>
     </v-card>
     <v-main>
@@ -55,3 +62,9 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss">
+div.v-tabs-slider-wrapper {
+  height: 4px !important;
+}
+</style>
