@@ -1,60 +1,57 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
+    <v-card
+      tile>
+      <v-toolbar
+        color="teal"
+        dark
+        flat
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
+        <v-toolbar-title>TODO APP</v-toolbar-title>
+        <v-tabs v-model="tab">
+          <v-tab
+            v-for="item in items"
+            :key="item.tab">
+            {{ item.tab }}
+          </v-tab>
+        </v-tabs>
+      </v-toolbar>
+    </v-card>
     <v-main>
-      <HelloWorld/>
+    <v-tabs-items v-model="tab">
+        <v-tab-item
+          v-for="item in items"
+          :key="item.tab">
+              <component v-bind:is="item.content"></component>
+        </v-tab-item>
+      </v-tabs-items>
     </v-main>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld';
+import Todos from './components/Todos';
+import Deadlines from './components/Deadlines';
+import Memo from './components/Memo';
 
 export default {
   name: 'App',
 
   components: {
     HelloWorld,
+    Todos,
+    Deadlines,
+    Memo
   },
 
   data: () => ({
-    //
+    tab: null,
+    items: [
+      { tab: 'Todos', content: 'Todos'},
+      { tab: 'Deadlines', content: 'Deadlines'},
+      { tab: 'Memo', content: 'Memo'},
+    ]
   }),
 };
 </script>
