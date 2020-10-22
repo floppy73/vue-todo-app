@@ -32,6 +32,7 @@
                 v-for="tag in item.tags"
                 :key="tag"
                 class="ma-1"
+                color="teal lighten-5"
               >
                 {{ tag }}
               </v-chip>
@@ -71,5 +72,9 @@ export default {
 </script>
 
 <style lang="scss">
+tr.done {
+  background-color: #e7e7e7;
 
+  td:nth-child(2){text-decoration: line-through;}
+}
 </style>
