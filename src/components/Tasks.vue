@@ -41,8 +41,9 @@
                 fab
                 dark
                 small
-                elevation="0"
+                elevation="1"
                 color="grey darken-1"
+                @click="deleteTask(item)"
               >
                 <v-icon fab dark>mdi-delete</v-icon>
               </v-btn>
@@ -67,7 +68,12 @@ export default {
     }
   },
   methods: {
-
+    deleteTask: function(item) {
+      console.log(item)
+      let index = this.tasks.indexOf(item);
+      console.log(index);
+      this.tasks.splice(index, 1);
+    }
   }
 }
 </script>
