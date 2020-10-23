@@ -1,6 +1,32 @@
 <template>
   <v-card flat>
     <v-card-text>
+      <form @submit.prevent="submit">
+        <v-container fluid>
+          <v-row align="center" justify="center">
+            <v-col cols="3">
+              <v-autocomplete
+                v-model="tagValues"
+                :items="tagList"
+                multiple
+                chips
+                deletable-chips
+                small-chips
+                label="Tags"
+              ></v-autocomplete>
+            </v-col>
+            <v-col cols="8" id="task-input">
+              <v-text-field
+                v-model="taskValue"
+                label="Task"
+                :append-outer-icon="'mdi-plus-circle'"
+                @click:append-outer="addTask"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </form>
+      <v-divider></v-divider>
       <v-simple-table>
         <thead>
           <tr>
@@ -61,6 +87,9 @@ export default {
   data () {
     return {
       done: '',
+      tagList: ['Work', 'Study', 'Math'],
+      tagValues: [],
+      taskValue: '',
       tasks: [
         {content: '数学の授業を一コマ見る', tags: ['Study', 'Math'], isChecked: false},
         {content: '書類を本校に送る', tags: ['Work'], isChecked: false}
@@ -68,6 +97,16 @@ export default {
     }
   },
   methods: {
+    addTask: function() {
+      let taskObj =  {
+        content: this.taskValue,
+        tags: this.tagValues,
+        isChecked: false
+      };
+      this.tasks.push(taskObj);
+      this.tagValues = "",
+      this.taskValue = ""
+    },
     deleteTask: function(item) {
       console.log(item)
       let index = this.tasks.indexOf(item);
@@ -83,5 +122,10 @@ tr.done {
   background-color: #e7e7e7;
 
   td:nth-child(2){text-decoration: line-through;}
+}
+
+div#task-input .mdi:before {
+  font-size: 40px;
+  color: #FF8F00;
 }
 </style>
