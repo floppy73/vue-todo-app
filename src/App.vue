@@ -38,7 +38,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld';
-import Todos from './components/Todos';
+import Tasks from './components/Tasks';
 import Deadlines from './components/Deadlines';
 import Memo from './components/Memo';
 
@@ -47,7 +47,7 @@ export default {
 
   components: {
     HelloWorld,
-    Todos,
+    Tasks,
     Deadlines,
     Memo
   },
@@ -55,7 +55,7 @@ export default {
   data: () => ({
     tab: null,
     items: [
-      { tab: 'Todos', content: 'Todos'},
+      { tab: 'Tasks', content: 'Tasks'},
       { tab: 'Deadlines', content: 'Deadlines'},
       { tab: 'Memo', content: 'Memo'},
     ]

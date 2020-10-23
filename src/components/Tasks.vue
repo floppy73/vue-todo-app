@@ -4,8 +4,7 @@
       <v-simple-table>
         <thead>
           <tr>
-            <th class="text-left">
-            </th>
+            <th></th>
             <th class="text-left">
               内容
             </th>
@@ -17,13 +16,13 @@
         </thead>
         <tbody>
           <tr
-            v-for="item in todos"
+            v-for="item in tasks"
             :key="item.content"
             v-bind:class="{done: item.isChecked}"
           >
             <td class="text-right">
               <v-checkbox
-              v-model="item.isChecked"
+                v-model="item.isChecked"
                 color="teal"
               ></v-checkbox></td>
             <td>{{ item.content }}</td>
@@ -43,6 +42,7 @@
                 dark
                 small
                 elevation="0"
+                color="grey darken-1"
               >
                 <v-icon fab dark>mdi-delete</v-icon>
               </v-btn>
@@ -56,17 +56,18 @@
 
 <script>
 export default {
-  name: 'Todos',
+  name: 'Tasks',
   data () {
     return {
       done: '',
-      todos: [
+      tasks: [
         {content: '数学の授業を一コマ見る', tags: ['Study', 'Math'], isChecked: false},
         {content: '書類を本校に送る', tags: ['Work'], isChecked: false}
       ]
     }
   },
   methods: {
+
   }
 }
 </script>
