@@ -84,6 +84,7 @@
 <script>
 export default {
   name: 'Tasks',
+  props: ["db"],
   data () {
     return {
       done: '',
@@ -104,6 +105,7 @@ export default {
         isChecked: false
       };
       this.tasks.push(taskObj);
+      this.db.tasks.add(taskObj);
       this.tagValues = "",
       this.taskValue = ""
     },

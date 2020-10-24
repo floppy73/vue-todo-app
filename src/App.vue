@@ -29,7 +29,7 @@
         <v-tab-item
           v-for="item in items"
           :key="item.tab">
-              <component v-bind:is="item.content"></component>
+              <component v-bind:is="item.content" :db="db"></component>
         </v-tab-item>
       </v-tabs-items>
     </v-main>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import Dexie from 'dexie';
 import HelloWorld from './components/HelloWorld';
 import Tasks from './components/Tasks';
 import Deadlines from './components/Deadlines';
@@ -52,14 +53,26 @@ export default {
     Memo
   },
 
-  data: () => ({
-    tab: null,
-    items: [
-      { tab: 'Tasks', content: 'Tasks'},
-      { tab: 'Deadlines', content: 'Deadlines'},
-      { tab: 'Memo', content: 'Memo'},
-    ]
-  }),
+  data () {
+    return {
+      db: new Dexie('todo_app_db'),
+      tab: null,
+      items: [
+        { tab: 'Tasks', content: 'Tasks'},
+        { tab: 'Deadlines', content: 'Deadlines'},
+        { tab: 'Memo', content: 'Memo'},
+      ]
+    }
+  },
+
+  created () {
+    console.log('created');
+    this.db.version(1).stores({
+      tasks: '++id',
+      deadlines: '++id',
+      memos: '++id'
+    });
+  }
 };
 </script>
 
