@@ -132,8 +132,7 @@ export default {
         tags: this.tagValues,
         date: this.datePick
       };
-      console.log(deadlineObj);
-      // this.deadlines.push(deadlineObj);
+      this.deadlines.push(deadlineObj);
       this.tagValues = "",
       this.deadlineValue = "";
       this.datePick = ""
