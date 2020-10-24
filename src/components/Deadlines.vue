@@ -12,6 +12,7 @@
                 chips
                 deletable-chips
                 label="Tags"
+                prepend-inner-icon="mdi-tag"
               ></v-autocomplete>
             </v-col>
             <v-col cols="7">
@@ -35,6 +36,7 @@
                     readonly
                     v-bind="attrs"
                     v-on="on"
+                    prepend-inner-icon="mdi-calendar"
                     :append-outer-icon="'mdi-plus-circle'"
                     @click:append-outer="addDeadline"
                   ></v-text-field>

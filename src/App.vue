@@ -73,8 +73,8 @@ tr.done {
   td:nth-child(2){text-decoration: line-through;}
 }
 
-#content-input .mdi:before {
+.mdi-plus-circle:before {
   font-size: 40px;
-  color: #FF8F00;
+  color: #FFA726;
 }
 </style>

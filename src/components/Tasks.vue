@@ -12,6 +12,7 @@
                 chips
                 deletable-chips
                 label="Tags"
+                prepend-inner-icon="mdi-tag"
               ></v-autocomplete>
             </v-col>
             <v-col cols="8" id="content-input">
