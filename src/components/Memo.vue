@@ -60,6 +60,7 @@
           <v-textarea
             filled
             :value="item.text"
+            @change="onChange(item)"
             background-color="grey lighten-3"
           ></v-textarea>
         </v-card-text>
@@ -97,6 +98,9 @@ export default {
     deleteMemo: function(item) {
       let index = this.memos.indexOf(item);
       this.memos.splice(index, 1);
+    },
+    onChange: function(item) {
+      item.text = event.target.value;
     }
   }
 }
