@@ -20,7 +20,7 @@
             small
             elevation="1"
             color="grey darken-1"
-            @click="deleteTask(item)"
+            @click="deleteMemo(item)"
           >
             <v-icon fab dark>mdi-delete</v-icon>
           </v-btn>
@@ -29,6 +29,7 @@
           <v-textarea
             filled
             :value="item.text"
+            background-color="blue-grey lighten-5"
           ></v-textarea>
         </v-card-text>
         <v-divider></v-divider>
@@ -46,6 +47,20 @@ export default {
         {title: 'Math', text: 'ベクトル復習する'},
         {title: 'その他', text: 'アイマスを見る'}
       ]
+    }
+  },
+  methods: {
+    /* addMemo: function() {
+      let taskObj =  {
+        content: this.taskValue,
+        isChecked: false
+      };
+      this.memos.push(memoObj);
+      this.memoValue = ""
+    }, */
+    deleteMemo: function(item) {
+      let index = this.memos.indexOf(item);
+      this.memos.splice(index, 1);
     }
   }
 }
