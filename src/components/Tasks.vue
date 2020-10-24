@@ -11,11 +11,10 @@
                 multiple
                 chips
                 deletable-chips
-                small-chips
                 label="Tags"
               ></v-autocomplete>
             </v-col>
-            <v-col cols="8" id="task-input">
+            <v-col cols="8" id="content-input">
               <v-text-field
                 v-model="taskValue"
                 label="Task"
@@ -108,9 +107,7 @@ export default {
       this.taskValue = ""
     },
     deleteTask: function(item) {
-      console.log(item)
       let index = this.tasks.indexOf(item);
-      console.log(index);
       this.tasks.splice(index, 1);
     }
   }
@@ -118,14 +115,5 @@ export default {
 </script>
 
 <style lang="scss">
-tr.done {
-  background-color: #e7e7e7;
 
-  td:nth-child(2){text-decoration: line-through;}
-}
-
-div#task-input .mdi:before {
-  font-size: 40px;
-  color: #FF8F00;
-}
 </style>

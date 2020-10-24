@@ -67,4 +67,14 @@ export default {
 div.v-tabs-slider-wrapper {
   height: 4px !important;
 }
+tr.done {
+  background-color: #e7e7e7;
+
+  td:nth-child(2){text-decoration: line-through;}
+}
+
+#content-input .mdi:before {
+  font-size: 40px;
+  color: #FF8F00;
+}
 </style>
