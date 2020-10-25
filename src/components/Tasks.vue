@@ -91,28 +91,33 @@ export default {
       tagList: ['Work', 'Study', 'Math'],
       tagValues: [],
       taskValue: '',
-      tasks: [
-        {content: '数学の授業を一コマ見る', tags: ['Study', 'Math'], isChecked: false},
-        {content: '書類を本校に送る', tags: ['Work'], isChecked: false}
-      ]
+      tasks: []
     }
   },
   methods: {
-    addTask: function() {
+    addTask: async function () {
       let taskObj =  {
         content: this.taskValue,
         tags: this.tagValues,
         isChecked: false
       };
-      this.tasks.push(taskObj);
       this.db.tasks.add(taskObj);
-      this.tagValues = "",
+      let allTasks = await this.db.tasks.toArray();
+      this.tasks = allTasks;
+      this.tagValues = "";
       this.taskValue = ""
     },
-    deleteTask: function(item) {
+    deleteTask: async function(item) {
       let index = this.tasks.indexOf(item);
-      this.tasks.splice(index, 1);
+      this.db.tasks.delete(item.id);
+      let allTasks = await this.db.tasks.toArray();
+      this.tasks = allTasks;
     }
+  },
+
+  async created () {
+    let allTasks = await this.db.tasks.toArray();
+    this.tasks = allTasks;
   }
 }
 </script>
