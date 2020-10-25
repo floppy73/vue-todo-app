@@ -111,11 +111,10 @@
 <script>
 export default {
   name: 'Deadlines',
-  props: ['db'],
+  props: ["db","tagList"],
   data () {
     return {
       done: '',
-      tagList: ['Work', 'Study', 'Math'],
       tagValues: [],
       deadlineValue: '',
       dateValue: '',

@@ -73,35 +73,48 @@
 <script>
 export default {
   name: 'Memo',
+  props: ["db","tagList"],
   data () {
     return {
-      tagList: ['Work', 'Study', 'Math'],
       tagValues: '',
       memoTitleValue: '',
-      memos: [
-        {title: 'Math', tags: ['Study'], text: 'ベクトル復習する'},
-        {title: 'その他', tags: ['Hobby'], text: 'アイマスを見る'}
-      ]
+      memos: []
     }
   },
   methods: {
-    addMemo: function() {
+    addMemo: async function() {
       let memoObj =  {
         title: this.memoTitleValue,
         tags: this.tagValues,
         text: ''
       };
-      this.memos.push(memoObj);
+
+      this.db.memos.add(memoObj);
+      let allMemos = await this.db.memos.toArray();
+      this.memos = allMemos;
+
       this.memoTitleValue = "",
       this.tagValues = ""
     },
-    deleteMemo: function(item) {
+    deleteMemo: async function(item) {
       let index = this.memos.indexOf(item);
-      this.memos.splice(index, 1);
+      this.db.memos.delete(item.id);
+      let allMemos = await this.db.memos.toArray();
+      this.memos = allMemos;
     },
     onChange: function(item) {
-      item.text = event.target.value;
+      let memoValue = event.target.value;
+      this.db.memos.put({
+        id: item.id,
+        title: item.title,
+        tags: item.tags,
+        text: memoValue
+      })
     }
+  },
+  async created () {
+    let allMemos = await this.db.memos.toArray();
+    this.memos = allMemos;
   }
 }
 </script>

@@ -29,7 +29,7 @@
         <v-tab-item
           v-for="item in items"
           :key="item.tab">
-              <component v-bind:is="item.content" :db="db"></component>
+              <component v-bind:is="item.content" :db="db" :tagList="tagList"></component>
         </v-tab-item>
       </v-tabs-items>
     </v-main>
@@ -61,7 +61,8 @@ export default {
         { tab: 'Tasks', content: 'Tasks'},
         { tab: 'Deadlines', content: 'Deadlines'},
         { tab: 'Memo', content: 'Memo'},
-      ]
+      ],
+      tagList: ['Work', 'Study', 'Math'],
     }
   },
 
