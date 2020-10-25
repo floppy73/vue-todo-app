@@ -111,6 +111,7 @@
 <script>
 export default {
   name: 'Deadlines',
+  props: ['db'],
   data () {
     return {
       done: '',
@@ -119,28 +120,34 @@ export default {
       deadlineValue: '',
       dateValue: '',
       datePick: '',
-      deadlines: [
-        {content: 'アイマス視聴期限', tags: ['Hobby'], date: '2020-10-30'},
-        {content: '書類を本校に送る', tags: ['Work'], date: '2020-12-01'}
-      ]
+      deadlines: []
     }
   },
   methods: {
-    addDeadline: function() {
+    addDeadline: async function() {
       let deadlineObj =  {
         content: this.deadlineValue,
         tags: this.tagValues,
         date: this.datePick
       };
-      this.deadlines.push(deadlineObj);
+      this.db.deadlines.add(deadlineObj);
+      let allDeadlines = await this.db.deadlines.toArray();
+      this.deadlines = allDeadlines;
       this.tagValues = "",
       this.deadlineValue = "";
       this.datePick = ""
     },
-    deleteDeadline: function(item) {
+    deleteDeadline: async function(item) {
       let index = this.deadlines.indexOf(item);
-      this.deadlines.splice(index, 1);
+      this.db.deadlines.delete(item.id);
+      let allDeadlines = await this.db.deadlines.toArray();
+      this.deadlines = allDeadlines;
     }
+  },
+
+  async created () {
+    let allDeadlines = await this.db.deadlines.toArray();
+    this.deadlines = allDeadlines;
   }
 }
 </script>
