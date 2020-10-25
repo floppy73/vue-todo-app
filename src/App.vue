@@ -62,7 +62,7 @@ export default {
         { tab: 'Deadlines', content: 'Deadlines'},
         { tab: 'Memo', content: 'Memo'},
       ],
-      tagList: ['Work', 'Study', 'Math'],
+      tagList: ['Work', 'Study', 'Hobby', 'Others'],
     }
   },
 

@@ -84,11 +84,10 @@
 <script>
 export default {
   name: 'Tasks',
-  props: ["db"],
+  props: ["db","tagList"],
   data () {
     return {
       done: '',
-      tagList: ['Work', 'Study', 'Math'],
       tagValues: [],
       taskValue: '',
       tasks: []
