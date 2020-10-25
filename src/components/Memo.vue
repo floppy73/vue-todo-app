@@ -97,7 +97,6 @@ export default {
       this.tagValues = ""
     },
     deleteMemo: async function(item) {
-      let index = this.memos.indexOf(item);
       this.db.memos.delete(item.id);
       let allMemos = await this.db.memos.toArray();
       this.memos = allMemos;

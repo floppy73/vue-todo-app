@@ -137,7 +137,6 @@ export default {
       this.datePick = ""
     },
     deleteDeadline: async function(item) {
-      let index = this.deadlines.indexOf(item);
       this.db.deadlines.delete(item.id);
       let allDeadlines = await this.db.deadlines.toArray();
       this.deadlines = allDeadlines;

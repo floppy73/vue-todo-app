@@ -107,7 +107,6 @@ export default {
       this.taskValue = ""
     },
     deleteTask: async function(item) {
-      let index = this.tasks.indexOf(item);
       this.db.tasks.delete(item.id);
       let allTasks = await this.db.tasks.toArray();
       this.tasks = allTasks;

@@ -38,7 +38,6 @@
 
 <script>
 import Dexie from 'dexie';
-import HelloWorld from './components/HelloWorld';
 import Tasks from './components/Tasks';
 import Deadlines from './components/Deadlines';
 import Memo from './components/Memo';
@@ -47,7 +46,6 @@ export default {
   name: 'App',
 
   components: {
-    HelloWorld,
     Tasks,
     Deadlines,
     Memo
