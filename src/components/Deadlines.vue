@@ -54,53 +54,63 @@
         </v-container>
       </form>
       <v-divider></v-divider>
-      <v-simple-table>
-        <thead>
-          <tr>
-            <th class="text-left">
-              内容
-            </th>
-            <th class="text-left">
-              期限
-            </th>
-            <th class="text-left">
-              タグ
-            </th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="item in deadlines"
-            :key="item.content"
-          >
-            <td>{{ item.content }}</td>
-            <td class="body-1">{{ item.date }}</td>
-            <td>
-              <v-chip
-                v-for="tag in item.tags"
-                :key="tag"
-                class="ma-1"
-                color="teal lighten-5"
-              >
-                {{ tag }}
-              </v-chip>
-            </td>
-            <td>
-              <v-btn
-                fab
-                dark
-                small
-                elevation="1"
-                color="grey darken-1"
-                @click="deleteDeadline(item)"
-              >
-                <v-icon fab dark>mdi-delete</v-icon>
-              </v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </v-simple-table>
+      <v-container>
+        <v-row justify="center">
+          <v-col class="
+            col-md-11
+            col-xl-10
+          ">
+            <v-simple-table>
+              <thead>
+                <tr>
+                  <th class="text-left">
+                    内容
+                  </th>
+                  <th class="text-left">
+                    期限
+                  </th>
+                  <th class="text-left">
+                    タグ
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="item in deadlines"
+                  :key="item.content"
+                  class="body-1"
+                >
+                  <td class="body-1">{{ item.content }}</td>
+                  <td class="body-1">{{ item.date }}</td>
+                  <td class="body-1">
+                    <v-chip
+                      v-for="tag in item.tags"
+                      :key="tag"
+                      class="ma-1"
+                      color="teal lighten-5"
+                    >
+                      {{ tag }}
+                    </v-chip>
+                  </td>
+                  <td>
+                    <v-btn
+                      fab
+                      dark
+                      small
+                      elevation="1"
+                      color="grey darken-1"
+                      @click="deleteDeadline(item)"
+                    >
+                      <v-icon fab dark>mdi-delete</v-icon>
+                    </v-btn>
+                  </td>
+                </tr>
+              </tbody>
+            </v-simple-table>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card-text>
   </v-card>
 </template>
@@ -139,9 +149,11 @@ export default {
 
       this.contentError = '';
       this.deadlineError = '';
+
       this.db.deadlines.add(deadlineObj);
       let allDeadlines = await this.db.deadlines.toArray();
       this.deadlines = allDeadlines;
+
       this.tagValues = "",
       this.deadlineValue = "";
       this.datePick = ""

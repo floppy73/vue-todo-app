@@ -27,46 +27,49 @@
     <v-row
       v-for="item in memos"
       :key="item.title"
+      justify="center"
     >
-      <v-card
-        flat
-        width="90%"
-        class="mx-auto"
-      >
-        <v-card-title
-          class="font-weight-regular"
+      <v-col class="col-md-11 col-xl-10">
+        <v-card
+          flat
+          width="90%"
+          class="mx-auto"
         >
-          {{ item.title }}
-          <v-chip
-            v-for="tag in item.tags"
-            :key="tag"
-            class="ma-1"
-            color="teal lighten-5"
+          <v-card-title
+            class="font-weight-regular"
           >
-            {{ tag }}
-          </v-chip>
-          <v-spacer></v-spacer>
-          <v-btn
-            fab
-            dark
-            small
-            elevation="1"
-            color="grey darken-1"
-            @click="deleteMemo(item)"
-          >
-            <v-icon fab dark>mdi-delete</v-icon>
-          </v-btn>
-        </v-card-title>
-        <v-card-text>
-          <v-textarea
-            filled
-            :value="item.text"
-            @change="onChange(item)"
-            background-color="grey lighten-3"
-          ></v-textarea>
-        </v-card-text>
-        <v-divider></v-divider>
-      </v-card>
+            {{ item.title }}
+            <v-chip
+              v-for="tag in item.tags"
+              :key="tag"
+              class="ma-1"
+              color="teal lighten-5"
+            >
+              {{ tag }}
+            </v-chip>
+            <v-spacer></v-spacer>
+            <v-btn
+              fab
+              dark
+              small
+              elevation="1"
+              color="grey darken-1"
+              @click="deleteMemo(item)"
+            >
+              <v-icon fab dark>mdi-delete</v-icon>
+            </v-btn>
+          </v-card-title>
+          <v-card-text>
+            <v-textarea
+              filled
+              :value="item.text"
+              @change="onChange(item)"
+              background-color="grey lighten-3"
+            ></v-textarea>
+          </v-card-text>
+          <v-divider></v-divider>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
 </template>

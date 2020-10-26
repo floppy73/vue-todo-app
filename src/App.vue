@@ -89,4 +89,7 @@ tr.done {
   font-size: 40px;
   color: #FFA726;
 }
+div.v-input__slot > div {
+  margin: 0 auto !important;
+}
 </style>
