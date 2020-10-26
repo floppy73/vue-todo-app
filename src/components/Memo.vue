@@ -17,6 +17,7 @@
             <v-text-field
               v-model="memoTitleValue"
               label="Memo Title"
+              :error-messages="error"
               :append-outer-icon="'mdi-plus-circle'"
               @click:append-outer="addMemo"
             ></v-text-field>
@@ -78,17 +79,24 @@ export default {
     return {
       tagValues: '',
       memoTitleValue: '',
-      memos: []
+      memos: [],
+      error: ''
     }
   },
   methods: {
     addMemo: async function() {
+      if (!this.memoTitleValue) {
+        this.error = 'メモ名は必須です';
+        return;
+      }
+
       let memoObj =  {
         title: this.memoTitleValue,
         tags: this.tagValues,
         text: ''
       };
 
+      this.error = "";
       this.db.memos.add(memoObj);
       let allMemos = await this.db.memos.toArray();
       this.memos = allMemos;

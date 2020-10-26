@@ -12,7 +12,7 @@
           <v-tabs 
             v-model="tab"
             fixed-tabs
-            align-with-title
+            centered
           >
             <v-tabs-slider color="teal lighten-4"></v-tabs-slider>
             <v-tab

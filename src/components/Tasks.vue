@@ -19,6 +19,8 @@
               <v-text-field
                 v-model="taskValue"
                 label="Task"
+                ref="textfield"
+                :error-messages="error"
                 :append-outer-icon="'mdi-plus-circle'"
                 @click:append-outer="addTask"
               ></v-text-field>
@@ -90,16 +92,23 @@ export default {
       done: '',
       tagValues: [],
       taskValue: '',
-      tasks: []
+      tasks: [],
+      error: ''
     }
   },
   methods: {
     addTask: async function () {
+      let textfield = this.$refs.textfield
+      if (!this.taskValue) {
+        this.error = 'タスク名は必須です';
+        return;
+      }
       let taskObj =  {
         content: this.taskValue,
         tags: this.tagValues,
         isChecked: false
       };
+      this.error = "";
       this.db.tasks.add(taskObj);
       let allTasks = await this.db.tasks.toArray();
       this.tasks = allTasks;

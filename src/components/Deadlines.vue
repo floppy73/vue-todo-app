@@ -17,6 +17,7 @@
             </v-col>
             <v-col cols="7">
               <v-text-field
+                :error-messages="contentError"
                 v-model="deadlineValue"
                 label="Content"
               ></v-text-field>
@@ -36,6 +37,7 @@
                     readonly
                     v-bind="attrs"
                     v-on="on"
+                    :error-messages="deadlineError"
                     prepend-inner-icon="mdi-calendar"
                     :append-outer-icon="'mdi-plus-circle'"
                     @click:append-outer="addDeadline"
@@ -72,11 +74,6 @@
             v-for="item in deadlines"
             :key="item.content"
           >
-            <!--<td class="text-right">
-              <v-checkbox
-                v-model="item.isChecked"
-                color="teal"
-              ></v-checkbox></td>-->
             <td>{{ item.content }}</td>
             <td class="body-1">{{ item.date }}</td>
             <td>
@@ -119,16 +116,29 @@ export default {
       deadlineValue: '',
       dateValue: '',
       datePick: '',
-      deadlines: []
+      deadlines: [],
+      contentError: '',
+      deadlineError: ''
     }
   },
   methods: {
     addDeadline: async function() {
+      if (!this.deadlineValue) {
+        this.contentError = 'メモ名は必須です';
+        return;
+      } else if (!this.datePick) {
+        this.deadlineError = '締め切りは必須です';
+        return;
+      }
+
       let deadlineObj =  {
         content: this.deadlineValue,
         tags: this.tagValues,
         date: this.datePick
       };
+
+      this.contentError = '';
+      this.deadlineError = '';
       this.db.deadlines.add(deadlineObj);
       let allDeadlines = await this.db.deadlines.toArray();
       this.deadlines = allDeadlines;
