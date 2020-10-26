@@ -5,7 +5,7 @@
         <v-container fluid>
           <v-row align="center" justify="center">
             <v-col cols="3">
-              <v-autocomplete
+              <v-combobox
                 v-model="tagValues"
                 :items="tagList"
                 multiple
@@ -13,7 +13,7 @@
                 deletable-chips
                 label="Tags"
                 prepend-inner-icon="mdi-tag"
-              ></v-autocomplete>
+              ></v-combobox>
             </v-col>
             <v-col cols="8" id="content-input">
               <v-text-field
