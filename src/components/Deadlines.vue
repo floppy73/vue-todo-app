@@ -10,7 +10,7 @@
       </div>
       <v-expand-transition>
         <form @submit.prevent="submit" v-show="showForm">
-          <v-container fluid>
+          <v-container>
             <v-row align="center" justify="center">
               <v-col cols="2">
                 <v-combobox
@@ -36,14 +36,14 @@
                   </template>
                 </v-combobox>
               </v-col>
-              <v-col cols="7">
+              <v-col cols="7" class="col-md-6 col-xl-5">
                 <v-text-field
                   :error-messages="contentError"
                   v-model="deadlineValue"
                   label="Content"
                 ></v-text-field>
               </v-col>
-              <v-col id="content-input">
+              <v-col id="content-input" cols="4" class="col-md-3 col-xl-2">
                 <v-menu
                   v-model="dateValue"
                   :close-on-content-click="false"

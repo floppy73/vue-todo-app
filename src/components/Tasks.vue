@@ -12,7 +12,7 @@
         <form @submit.prevent="submit" v-show="showForm">
           <v-container>
             <v-row align="center" justify="center">
-              <v-col cols="3">
+              <v-col cols="3" class="col-lg-2">
                 <v-combobox
                   v-model="tagValues"
                   :items="tagList"
@@ -36,7 +36,7 @@
                   </template>
                 </v-combobox>
               </v-col>
-              <v-col cols="8" id="content-input">
+              <v-col cols="8" class="col-md-6 col-xl-5" id="content-input">
                 <v-text-field
                   v-model="taskValue"
                   label="Task"
