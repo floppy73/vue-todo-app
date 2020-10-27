@@ -1,33 +1,56 @@
 <template>
   <v-card flat>
     <v-card-text>
-      <form @submit.prevent="submit">
-        <v-container fluid>
-          <v-row align="center" justify="center">
-            <v-col cols="3">
-              <v-combobox
-                v-model="tagValues"
-                :items="tagList"
-                multiple
-                chips
-                deletable-chips
-                label="Tags"
-                prepend-inner-icon="mdi-tag"
-              ></v-combobox>
-            </v-col>
-            <v-col cols="8" id="content-input">
-              <v-text-field
-                v-model="taskValue"
-                label="Task"
-                ref="textfield"
-                :error-messages="error"
-                :append-outer-icon="'mdi-plus-circle'"
-                @click:append-outer="addTask"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </v-container>
-      </form>
+      <div class="buttonArea">
+        <v-btn
+          color="amber darken-2"
+          dark
+          @click="showForm = !showForm"
+        >新しいタスクを追加する</v-btn>
+      </div>
+      <v-expand-transition>
+        <form @submit.prevent="submit" v-show="showForm">
+          <v-container>
+            <v-row align="center" justify="center">
+              <v-col cols="3">
+                <v-combobox
+                  v-model="tagValues"
+                  :items="tagList"
+                  multiple
+                  chips
+                  deletable-chips
+                  label="Tags"
+                  prepend-inner-icon="mdi-tag"
+                >
+                  <template v-slot:selection="data">
+                    <v-chip
+                      color="teal lighten-5"
+                      :key="JSON.stringify(data.item)"
+                      v-bind="data.attrs"
+                      :input-value="data.selected"
+                      :disabled="data.disabled"
+                      @click:close="data.parent.selectItem(data.item)"
+                    >
+                      {{ data.item }}
+                    </v-chip>
+                  </template>
+                </v-combobox>
+              </v-col>
+              <v-col cols="8" id="content-input">
+                <v-text-field
+                  v-model="taskValue"
+                  label="Task"
+                  ref="textfield"
+                  :error-messages="error"
+                  :append-outer-icon="'mdi-plus-circle'"
+                  @click:append-outer="addTask"
+                  hint="右の+を押して追加"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-container>
+        </form>
+      </v-expand-transition>
       <v-divider></v-divider>
       <v-container>
         <v-row justify="center">
@@ -102,7 +125,8 @@ export default {
       tagValues: [],
       taskValue: '',
       tasks: [],
-      error: ''
+      error: '',
+      showForm: false
     }
   },
   methods: {

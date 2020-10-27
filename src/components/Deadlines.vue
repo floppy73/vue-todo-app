@@ -1,58 +1,80 @@
 <template>
   <v-card flat>
     <v-card-text>
-      <form @submit.prevent="submit">
-        <v-container fluid>
-          <v-row align="center" justify="center">
-            <v-col cols="2">
-              <v-combobox
-                v-model="tagValues"
-                :items="tagList"
-                multiple
-                chips
-                deletable-chips
-                label="Tags"
-                prepend-inner-icon="mdi-tag"
-              ></v-combobox>
-            </v-col>
-            <v-col cols="7">
-              <v-text-field
-                :error-messages="contentError"
-                v-model="deadlineValue"
-                label="Content"
-              ></v-text-field>
-            </v-col>
-            <v-col id="content-input">
-              <v-menu
-                v-model="dateValue"
-                :close-on-content-click="false"
-                transition="fade-transition"
-                offset-y
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
+      <div class="buttonArea">
+        <v-btn
+          color="amber darken-2"
+          dark
+          @click="showForm = !showForm"
+        >新しい締切を追加する</v-btn>
+      </div>
+      <v-expand-transition>
+        <form @submit.prevent="submit" v-show="showForm">
+          <v-container fluid>
+            <v-row align="center" justify="center">
+              <v-col cols="2">
+                <v-combobox
+                  v-model="tagValues"
+                  :items="tagList"
+                  multiple
+                  chips
+                  deletable-chips
+                  label="Tags"
+                  prepend-inner-icon="mdi-tag"
+                >
+                  <template v-slot:selection="data">
+                    <v-chip
+                      color="teal lighten-5"
+                      :key="JSON.stringify(data.item)"
+                      v-bind="data.attrs"
+                      :input-value="data.selected"
+                      :disabled="data.disabled"
+                      @click:close="data.parent.selectItem(data.item)"
+                    >
+                      {{ data.item }}
+                    </v-chip>
+                  </template>
+                </v-combobox>
+              </v-col>
+              <v-col cols="7">
+                <v-text-field
+                  :error-messages="contentError"
+                  v-model="deadlineValue"
+                  label="Content"
+                ></v-text-field>
+              </v-col>
+              <v-col id="content-input">
+                <v-menu
+                  v-model="dateValue"
+                  :close-on-content-click="false"
+                  transition="fade-transition"
+                  offset-y
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="datePick"
+                      label="Deadline"
+                      readonly
+                      v-bind="attrs"
+                      v-on="on"
+                      :error-messages="deadlineError"
+                      prepend-inner-icon="mdi-calendar"
+                      :append-outer-icon="'mdi-plus-circle'"
+                      @click:append-outer="addDeadline"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    color="teal"
                     v-model="datePick"
-                    label="Deadline"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                    :error-messages="deadlineError"
-                    prepend-inner-icon="mdi-calendar"
-                    :append-outer-icon="'mdi-plus-circle'"
-                    @click:append-outer="addDeadline"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  color="teal"
-                  v-model="datePick"
-                  @input="dateValue = false"
-                ></v-date-picker>
-              </v-menu>
-            </v-col>
-          </v-row>
-        </v-container>
-      </form>
+                    @input="dateValue = false"
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+          </v-container>
+        </form>
+      </v-expand-transition>
       <v-divider></v-divider>
       <v-container>
         <v-row justify="center">
@@ -128,7 +150,8 @@ export default {
       datePick: '',
       deadlines: [],
       contentError: '',
-      deadlineError: ''
+      deadlineError: '',
+      showForm: false
     }
   },
   methods: {

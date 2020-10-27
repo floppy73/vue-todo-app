@@ -79,6 +79,11 @@ export default {
 div.v-tabs-slider-wrapper {
   height: 4px !important;
 }
+div.buttonArea {
+  padding: 10px 25px 25px 25px;
+  text-align: center;
+}
+
 tr.done {
   background-color: #e7e7e7;
 
