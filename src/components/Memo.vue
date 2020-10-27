@@ -42,6 +42,7 @@
                     :error-messages="error"
                     :append-outer-icon="'mdi-plus-circle'"
                     @click:append-outer="addMemo"
+                    hint="右の+を押して追加"
                   ></v-text-field>
                 </v-col>
             </v-row>

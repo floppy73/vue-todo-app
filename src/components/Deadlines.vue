@@ -62,6 +62,7 @@
                       prepend-inner-icon="mdi-calendar"
                       :append-outer-icon="'mdi-plus-circle'"
                       @click:append-outer="addDeadline"
+                      hint="右の+を押して追加"
                     ></v-text-field>
                   </template>
                   <v-date-picker

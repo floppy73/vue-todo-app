@@ -40,7 +40,6 @@
                 <v-text-field
                   v-model="taskValue"
                   label="Task"
-                  ref="textfield"
                   :error-messages="error"
                   :append-outer-icon="'mdi-plus-circle'"
                   @click:append-outer="addTask"
@@ -131,7 +130,6 @@ export default {
   },
   methods: {
     addTask: async function () {
-      let textfield = this.$refs.textfield
       if (!this.taskValue) {
         this.error = 'タスク名は必須です';
         return;
